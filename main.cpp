@@ -1,14 +1,17 @@
 #include <SDL.h>
 #include <iostream>
 #include <tuple>
+#include <chrono>
 
-const int width = 400;
-const int height = 400;
-const double G = 0.02;	//controls simulation speed
+using namespace std;
+
+const int width = 800;
+const int height = 800;
+const double G = 2;	//controls simulation speed
 
 int render_mode = 2;		//Simulation = 1, Fractal=2
 
-int maxIterations = pow(10, 7);
+int maxIterations = pow(10, 6);		//  /!\ IF YOU CHANGE DIMENSIONS; ADJUST THIS /!\
 
 struct planet{
 	double mass;
@@ -21,9 +24,9 @@ struct planet{
 	bool fixed;
 };
 
-planet p1 = { 100, 200, 100, 0, 0, 0, 0, false};
-planet p2 = { 100, 100, 200, 0, 0, 0, 0, false };
-planet p3 = { 100, 300, 200, 0, 0, 0, 0, false };
+planet p1 = { 100, 0, 0, 0.001, 0.001, 0, 0, false };
+planet p2 = { 300, 400, 400, 0, 0, 0, 0, false };
+planet p3 = { 100, 10, 400, 0, 0, 0, 0, false };
 
 struct vector {
 	double intensity;
@@ -118,12 +121,13 @@ std::tuple<planet&, planet&, planet&> parameter_updater(planet &p1,planet &p2,pl
 
 int main(int argc, char* argv[]) {
 
-	SDL_Init(SDL_INIT_EVERYTHING);
+	SDL_Init(SDL_INIT_VIDEO);
 
 	SDL_Window* window;
 	SDL_Renderer* renderer;
 	SDL_Event event;
 
+	
 	SDL_CreateWindowAndRenderer(width, height, 0, &window, &renderer);
 	SDL_RenderSetLogicalSize(renderer, width, height);
 
@@ -149,68 +153,67 @@ int main(int argc, char* argv[]) {
 		}
 	}
 
-	if (render_mode == 2) {
-		std::cout << "Entered Fractal mode";
+	if (render_mode == 2){
+		auto t = chrono::system_clock::now().time_since_epoch();
+		auto start_time = chrono::duration_cast<chrono::milliseconds>(t).count();
+		std::cout << start_time;
 
-		int x = 0;
-		int y = 0;
 		int i = 0;
-		int max_i = 500000;
+		int max_i = 10;
 		int index = 0;
 		int percentage = 0;
 		planet p2_t;
 		planet p3_t;
 
 		while (true) {
-			bool not_completed = true;
-				if (SDL_PollEvent(&event) and event.type == SDL_QUIT) {
-					break;
-				}
-			if (not_completed){
-				for (; x <= width; x++) {
-					y = 0;
+		bool not_completed = true;
+		if (SDL_PollEvent(&event) and event.type == SDL_QUIT) {
+			break;
+		}
+		if (not_completed){
+			for (int x =0; x <= width; x++) {
+				
+				for (int y = 0; y <= height; y++) {
+					p1.pos_x = x;
+					p1.pos_y = y;
 
 					i = 0;
-					for (; y <= height; y++) {
-						p1.pos_x = x;
-						p1.pos_y = y;
-
-
-						while (p1.pos_x <= width and p1.pos_x >= 0 and p1.pos_y <= height and p1.pos_y >= 0 and i < max_i) {
-							std::tie(p1, p2_t, p3_t) = parameter_updater(p1, p2, p3);
-							i++;
-						}
-
-						if (i > max_i) {
-							max_i = i;
-						}
-
-						int color = 510*i / max_i;
-						int blue = 0;
-						int red = 0;
-						if (color > 255) {
-							blue = 255;
-							red = color - 255;
-						}
-						else { blue = color; red = 0; }
-						SDL_SetRenderDrawColor(renderer, red, 5, blue, 255);
-						SDL_RenderDrawPoint(renderer, x, y);
-						
-
-						if (round((index) / static_cast<float>(width * height) * 100)> percentage) {
-							system("cls");
-							std::cout << ++percentage << "% done "  <<max_i << std::endl;
-						}
-						index++;
-						SDL_RenderPresent(renderer);
+					while (p1.pos_x <= width and p1.pos_x >= 0 and p1.pos_y <= height and p1.pos_y >= 0 and i < maxIterations) {
+						std::tie(p1, p2_t, p3_t) = parameter_updater(p1, p2, p3);
+						i++;
 					}
+
+					if (i > max_i and i!=maxIterations) {
+						max_i = i;
+					}
+
+					int color = 510*i / max_i;
+					int blue = 0;
+					int red = 0;
+					if (color > 255) {
+						blue = 255;
+						red = color - 255;
+					}
+					else { blue = color; red = 0; }
+					SDL_SetRenderDrawColor(renderer, red, 5, blue, 255);
+					SDL_RenderDrawPoint(renderer, x, y);
+
+					if (round((index) / static_cast<float>(width * height) * 100)> percentage) {
+						auto t_2 = chrono::system_clock::now().time_since_epoch();
+						auto current_time = chrono::duration_cast<chrono::milliseconds>(t_2).count();
+						std::cout << "\r" << ++percentage << "% done " << ((current_time - start_time) * (100 - percentage)) / ((percentage) * 1000) << " seconds left. " << max_i << std::flush;
+					}
+					index++;
 				}
 			}
-			not_completed = false;
+			SDL_RenderPresent(renderer);
+		}
+		not_completed = false;
 		}
 	}
 
 	SDL_DestroyWindow(window);
+	SDL_DestroyRenderer(renderer);
 	return 0;
 
 }
