@@ -2,13 +2,13 @@
 #include <iostream>
 #include <tuple>
 
-const int width = 700;
-const int height = 700;
-const double G = 0.2;	//controls simulation speed
+const int width = 400;
+const int height = 400;
+const double G = 0.02;	//controls simulation speed
 
 int render_mode = 2;		//Simulation = 1, Fractal=2
 
-int maxIterations = pow(10, 9);
+int maxIterations = pow(10, 7);
 
 struct planet{
 	double mass;
@@ -21,14 +21,14 @@ struct planet{
 	bool fixed;
 };
 
-planet p1 = { 100, 0, 0, 0, 0, 0, 0, false};
-planet p2 = { 100, 200, 200, 0, 0, 0, 0, true };
-planet p3 = { 100, 200, 300, 0, 0, 0, 0, true };
+planet p1 = { 100, 200, 100, 0, 0, 0, 0, false};
+planet p2 = { 100, 100, 200, 0, 0, 0, 0, false };
+planet p3 = { 100, 300, 200, 0, 0, 0, 0, false };
 
 struct vector {
 	double intensity;
 	double angle;
-	int x_sign;
+	int x_sign;	
 	int y_sign;
 };
 
@@ -37,7 +37,7 @@ struct vector {
 
 
 std::tuple<planet&, planet&, planet&> parameter_updater(planet &p1,planet &p2,planet &p3){
-	double dtime = 1;
+	double dtime = 3;
 	double dtime2 = pow(dtime, 2);
 
 	
@@ -155,9 +155,11 @@ int main(int argc, char* argv[]) {
 		int x = 0;
 		int y = 0;
 		int i = 0;
-		int max_i = 10000;
+		int max_i = 500000;
 		int index = 0;
 		int percentage = 0;
+		planet p2_t;
+		planet p3_t;
 
 		while (true) {
 			bool not_completed = true;
@@ -173,8 +175,9 @@ int main(int argc, char* argv[]) {
 						p1.pos_x = x;
 						p1.pos_y = y;
 
-						while (p1.pos_x <= width and p1.pos_x >= 0 and p1.pos_y <= height and p1.pos_y >= 0 and i < maxIterations) {
-							std::tie(p1, p2, p3) = parameter_updater(p1, p2, p3);
+
+						while (p1.pos_x <= width and p1.pos_x >= 0 and p1.pos_y <= height and p1.pos_y >= 0 and i < max_i) {
+							std::tie(p1, p2_t, p3_t) = parameter_updater(p1, p2, p3);
 							i++;
 						}
 
@@ -182,16 +185,24 @@ int main(int argc, char* argv[]) {
 							max_i = i;
 						}
 
-						int color = i / max_i * 255;
-						SDL_SetRenderDrawColor(renderer, color, color, color, 255);
+						int color = 510*i / max_i;
+						int blue = 0;
+						int red = 0;
+						if (color > 255) {
+							blue = 255;
+							red = color - 255;
+						}
+						else { blue = color; red = 0; }
+						SDL_SetRenderDrawColor(renderer, red, 5, blue, 255);
 						SDL_RenderDrawPoint(renderer, x, y);
-						SDL_RenderPresent(renderer);
+						
 
 						if (round((index) / static_cast<float>(width * height) * 100)> percentage) {
 							system("cls");
-							std::cout << ++percentage << "% done "  << color <<std::endl;
+							std::cout << ++percentage << "% done "  <<max_i << std::endl;
 						}
 						index++;
+						SDL_RenderPresent(renderer);
 					}
 				}
 			}

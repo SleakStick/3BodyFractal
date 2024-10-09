@@ -1,9 +1,9 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\Benjamin Dropmann\\source\\repos\\3BodyFractal\\",
+  "WorkspaceRootPath": "C:\\Users\\Benja\\Documents\\Programming\\cpp\\3BodyFractal\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{14B1E62E-7F1F-41E4-999F-A926592A35FF}|3BodyFractal.vcxproj|C:\\Users\\Benjamin Dropmann\\source\\repos\\3BodyFractal\\main.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "AbsoluteMoniker": "D:0:0:{14B1E62E-7F1F-41E4-999F-A926592A35FF}|3BodyFractal.vcxproj|C:\\Users\\Benja\\Documents\\Programming\\cpp\\3BodyFractal\\main.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{14B1E62E-7F1F-41E4-999F-A926592A35FF}|3BodyFractal.vcxproj|solutionrelative:main.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     }
   ],
@@ -20,11 +20,11 @@
               "$type": "Document",
               "DocumentIndex": 0,
               "Title": "main.cpp",
-              "DocumentMoniker": "C:\\Users\\Benjamin Dropmann\\source\\repos\\3BodyFractal\\main.cpp",
+              "DocumentMoniker": "C:\\Users\\Benja\\Documents\\Programming\\cpp\\3BodyFractal\\main.cpp",
               "RelativeDocumentMoniker": "main.cpp",
-              "ToolTip": "C:\\Users\\Benjamin Dropmann\\source\\repos\\3BodyFractal\\main.cpp",
+              "ToolTip": "C:\\Users\\Benja\\Documents\\Programming\\cpp\\3BodyFractal\\main.cpp",
               "RelativeToolTip": "main.cpp",
-              "ViewState": "AgIAAJYAAAAAAAAAAAAUwJ0AAAATAAAAAAAAAA==",
+              "ViewState": "AQIAAHsAAAAAAAAAAAAAAJ0AAAAPAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2024-10-08T20:58:17.626Z",
               "EditorCaption": ""

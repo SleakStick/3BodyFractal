@@ -1,9 +1,9 @@
 ﻿  main.cpp
-C:\Users\Benjamin Dropmann\source\repos\3BodyFractal\main.cpp(11,19): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-C:\Users\Benjamin Dropmann\source\repos\3BodyFractal\main.cpp(143,46): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
-C:\Users\Benjamin Dropmann\source\repos\3BodyFractal\main.cpp(143,36): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
-C:\Users\Benjamin Dropmann\source\repos\3BodyFractal\main.cpp(144,46): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
-C:\Users\Benjamin Dropmann\source\repos\3BodyFractal\main.cpp(144,36): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
-C:\Users\Benjamin Dropmann\source\repos\3BodyFractal\main.cpp(145,46): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
-C:\Users\Benjamin Dropmann\source\repos\3BodyFractal\main.cpp(145,36): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
-  3BodyFractal.vcxproj -> C:\Users\Benjamin Dropmann\source\repos\3BodyFractal\x64\Debug\3BodyFractal.exe
+C:\Users\Benja\Documents\Programming\cpp\3BodyFractal\main.cpp(11,19): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+C:\Users\Benja\Documents\Programming\cpp\3BodyFractal\main.cpp(143,46): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\Benja\Documents\Programming\cpp\3BodyFractal\main.cpp(143,36): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\Benja\Documents\Programming\cpp\3BodyFractal\main.cpp(144,46): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\Benja\Documents\Programming\cpp\3BodyFractal\main.cpp(144,36): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\Benja\Documents\Programming\cpp\3BodyFractal\main.cpp(145,46): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\Benja\Documents\Programming\cpp\3BodyFractal\main.cpp(145,36): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+  3BodyFractal.vcxproj -> C:\Users\Benja\Documents\Programming\cpp\3BodyFractal\x64\Debug\3BodyFractal.exe
