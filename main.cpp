@@ -24,9 +24,9 @@ struct planet{
 	bool fixed;
 };
 
-planet p1 = { 100, 0, 0, 0.001, 0.001, 0, 0, false };
+planet p1 = { 100, 400, 300, 0.01, 0, 0, 0, false };
 planet p2 = { 300, 400, 400, 0, 0, 0, 0, false };
-planet p3 = { 100, 10, 400, 0, 0, 0, 0, false };
+planet p3 = { 100, 400, 500, 0, 0, 0, 0, false };
 
 struct vector {
 	double intensity;
@@ -40,7 +40,7 @@ struct vector {
 
 
 std::tuple<planet&, planet&, planet&> parameter_updater(planet &p1,planet &p2,planet &p3){
-	double dtime = 3;
+	double dtime = 1;
 	double dtime2 = pow(dtime, 2);
 
 	
@@ -159,7 +159,7 @@ int main(int argc, char* argv[]) {
 		std::cout << start_time;
 
 		int i = 0;
-		int max_i = 10;
+		int max_i = 0;
 		int index = 0;
 		int percentage = 0;
 		planet p2_t;
@@ -201,7 +201,7 @@ int main(int argc, char* argv[]) {
 					if (round((index) / static_cast<float>(width * height) * 100)> percentage) {
 						auto t_2 = chrono::system_clock::now().time_since_epoch();
 						auto current_time = chrono::duration_cast<chrono::milliseconds>(t_2).count();
-						std::cout << "\r" << ++percentage << "% done " << ((current_time - start_time) * (100 - percentage)) / ((percentage) * 1000) << " seconds left. " << max_i << std::flush;
+						std::cout << "\r" << ++percentage << "% done " << ((current_time - start_time) * (100 - percentage)) / ((percentage) * 1000) << " seconds left. " << std::flush;
 					}
 					index++;
 				}
