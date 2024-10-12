@@ -5,9 +5,9 @@
 
 using namespace std;
 
-const int width = 800;
-const int height = 800;
-const double G = 2;	//controls simulation speed
+const int width = 500;
+const int height = 500;
+const double G = 0.2;	//controls simulation speed
 
 int render_mode = 2;		//Simulation = 1, Fractal=2
 
@@ -25,8 +25,8 @@ struct planet{
 };
 
 planet p1 = { 100, 400, 300, 0.01, 0, 0, 0, false };
-planet p2 = { 300, 400, 400, 0, 0, 0, 0, false };
-planet p3 = { 100, 400, 500, 0, 0, 0, 0, false };
+planet p2 = { 300, 250, 300, 0, 0, 0, 0, false };
+planet p3 = { 100, 250, 200, 0, 0, 0, 0, false };
 
 struct vector {
 	double intensity;
@@ -40,7 +40,7 @@ struct vector {
 
 
 std::tuple<planet&, planet&, planet&> parameter_updater(planet &p1,planet &p2,planet &p3){
-	double dtime = 1;
+	double dtime = 3;
 	double dtime2 = pow(dtime, 2);
 
 	
@@ -159,11 +159,11 @@ int main(int argc, char* argv[]) {
 		std::cout << start_time;
 
 		int i = 0;
-		int max_i = 0;
+		int max_i = 10333;
 		int index = 0;
 		int percentage = 0;
 		planet p2_t;
-		planet p3_t;
+		planet p3_t; 
 
 		while (true) {
 		bool not_completed = true;
@@ -187,21 +187,24 @@ int main(int argc, char* argv[]) {
 						max_i = i;
 					}
 
-					int color = 510*i / max_i;
+					int color = 765*i / max_i;
 					int blue = 0;
 					int red = 0;
-					if (color > 255) {
+					int green= 0;
+					if (color > 510) {
 						blue = 255;
-						red = color - 255;
+						red = 255;
+						green = color - 510;
 					}
-					else { blue = color; red = 0; }
-					SDL_SetRenderDrawColor(renderer, red, 5, blue, 255);
+					else if(color >=510) { blue = 255; red = color-255; }
+					else { blue = color; }
+					SDL_SetRenderDrawColor(renderer, red, green, blue, 255);
 					SDL_RenderDrawPoint(renderer, x, y);
 
 					if (round((index) / static_cast<float>(width * height) * 100)> percentage) {
 						auto t_2 = chrono::system_clock::now().time_since_epoch();
 						auto current_time = chrono::duration_cast<chrono::milliseconds>(t_2).count();
-						std::cout << "\r" << ++percentage << "% done " << ((current_time - start_time) * (100 - percentage)) / ((percentage) * 1000) << " seconds left. " << std::flush;
+						std::cout << "\r" << ++percentage << "% done " << ((current_time - start_time) * (100 - percentage)) / ((percentage) * 1000) << " seconds remaining. " << std::flush;
 					}
 					index++;
 				}
